@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20 animate-pulse" />
+      <div className="absolute inset-0 bg-linear-to-br from-purple-900/20 via-black to-blue-900/20 animate-pulse" />
 
       {/* Grid pattern overlay */}
       <div
@@ -27,13 +27,13 @@ export default function NotFound() {
           {/* Animated 404 with shader */}
           <div className="relative">
             {/* Glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-blue-500/30 blur-3xl scale-150 animate-pulse" />
+            <div className="absolute inset-0 bg-linear-to-r from-purple-500/30 to-blue-500/30 blur-3xl scale-150 animate-pulse" />
 
             {/* 404 Text with shader background */}
             <div className="relative flex items-center justify-center">
               <div className="absolute scale-75 sm:scale-100"></div>
               <h1 className="relative text-8xl sm:text-9xl lg:text-[12rem] font-bold tracking-tighter">
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+                <span className="bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
                   404
                 </span>
               </h1>
@@ -49,7 +49,7 @@ export default function NotFound() {
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               Lost in the{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                 digital void
               </span>
             </h2>
@@ -65,7 +65,7 @@ export default function NotFound() {
             <Link href="/">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-full group"
+                className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-full group"
               >
                 <Home className="mr-2 w-5 h-5" />
                 Return Home
@@ -76,7 +76,7 @@ export default function NotFound() {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent" />
     </div>
   );
 }

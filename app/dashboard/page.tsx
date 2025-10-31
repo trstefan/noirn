@@ -39,7 +39,7 @@ export default function DashboardPage() {
   if (!user) return null;
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-red-500">
       <h2 className="text-xl mb-4">Welcome back, {user.email}</h2>
       <p>Here you'll eventually create and view your mood entries.</p>
     </div>

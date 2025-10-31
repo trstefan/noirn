@@ -1,48 +1,16 @@
-// app/auth/page.tsx
-"use client";
+import AuthenticationCard from "@/components/AuthForm";
 
-import React, { useState } from "react";
-import ToggleTabs from "@/components/ToggleTabs";
-import AuthForm from "@/components/AuthForm";
-
-export default function AuthPage() {
-  const [active, setActive] = useState<"signup" | "login">("signup");
-
+export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-neutral-900 text-white p-6">
-      <div className="w-full max-w-3xl bg-gray-900 rounded-xl p-8 shadow-lg">
-        <header className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold">Welcome to Noirn</h1>
-          <ToggleTabs
-            tabs={["signup", "login"]}
-            active={active}
-            onChange={(t) => setActive(t as "signup" | "login")}
-          />
-        </header>
+    <div className="min-h-screen bg-black text-white relative flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div className="absolute inset-0 bg-linear-to-br from-purple-900/20 via-black to-blue-900/20" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="md:col-span-1">
-            {/* Left column: marketing copy / elevator pitch */}
-            <p className="text-gray-300 mb-4">
-              Save micro-journals tied to your mood. Private by default. Nights
-              when you need them.
-            </p>
-            <ul className="text-sm text-gray-400 space-y-2">
-              <li>• Private mood tracking</li>
-              <li>• Add notes and reflections</li>
-              <li>• Export or sync later</li>
-            </ul>
-          </div>
+      {/* Subtle overlay for better contrast */}
+      <div className="absolute inset-0 bg-black/20" />
 
-          <div>
-            <AuthForm mode={active} />
-            <div className="text-xs text-gray-500 mt-3">
-              Want to use Google/GitHub? You can enable OAuth later in Supabase
-              and add buttons here.
-            </div>
-          </div>
-        </div>
+      <div className="flex-1 flex items-center justify-center">
+        <AuthenticationCard />
       </div>
-    </main>
+    </div>
   );
 }
