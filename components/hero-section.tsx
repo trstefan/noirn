@@ -59,18 +59,6 @@ export default function Component() {
               </div>
 
               {/* Floating elements */}
-              <div
-                className="absolute -top-4 -right-4 w-3 h-3 bg-purple-400 rounded-full animate-bounce"
-                style={{ animationDelay: "0s" }}
-              />
-              <div
-                className="absolute top-1/3 -left-6 w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-                style={{ animationDelay: "1s" }}
-              />
-              <div
-                className="absolute bottom-1/4 -right-8 w-4 h-4 bg-pink-400 rounded-full animate-bounce"
-                style={{ animationDelay: "2s" }}
-              />
             </div>
           </div>
         </div>
