@@ -1,33 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Smile, Meh, Frown, Heart, Zap, Sparkles } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabaseClient";
+import { moodOptions, activityTags } from "@/constants";
 
-const moodOptions = [
-  { icon: Smile, label: "Happy", color: "from-yellow-400 to-orange-400" },
-  { icon: Heart, label: "Loved", color: "from-pink-400 to-red-400" },
-  { icon: Zap, label: "Energetic", color: "from-purple-400 to-blue-400" },
-  { icon: Meh, label: "Neutral", color: "from-gray-400 to-gray-500" },
-  { icon: Frown, label: "Sad", color: "from-blue-400 to-indigo-400" },
-];
+interface FeelingsFormProps {
+  user: User;
+}
 
-const activityTags = [
-  { label: "Work", color: "from-blue-500 to-cyan-500" },
-  { label: "Exercise", color: "from-green-500 to-emerald-500" },
-  { label: "Social", color: "from-pink-500 to-rose-500" },
-  { label: "Creative", color: "from-purple-500 to-violet-500" },
-  { label: "Relax", color: "from-yellow-500 to-amber-500" },
-  { label: "Learn", color: "from-orange-500 to-red-500" },
-  { label: "Music", color: "from-indigo-500 to-blue-500" },
-  { label: "Reading", color: "from-teal-500 to-cyan-500" },
-];
-
-export default function FeelingsForm() {
+export default function FeelingsForm({ user }: FeelingsFormProps) {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const [note, setNote] = useState("");
   const [hasSubmittedToday, setHasSubmittedToday] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // 🔍 Check if user has already submitted today on mount
+  useEffect(() => {
+    const checkExistingSubmission = async () => {
+      const today = new Date().toISOString().split("T")[0];
+
+      const { data: existingForms, error } = await supabase
+        .from("submittedMoodForms")
+        .select("id, created_at")
+        .eq("user_id", user.id)
+        .gte("created_at", `${today}T00:00:00.000Z`)
+        .lte("created_at", `${today}T23:59:59.999Z`);
+
+      if (error) console.error("❌ Error checking today's form:", error);
+
+      if (existingForms && existingForms.length > 0) {
+        setHasSubmittedToday(true);
+      }
+      setLoading(false);
+    };
+
+    checkExistingSubmission();
+  }, [user.id]);
 
   const toggleActivity = (activity: string) => {
     setSelectedActivities((prev) =>
@@ -37,13 +49,36 @@ export default function FeelingsForm() {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!selectedMood) return;
 
-    // Here you would save to database
-    console.log("[v0] Submitting:", { selectedMood, selectedActivities, note });
-    setHasSubmittedToday(true);
+    try {
+      const { error } = await supabase.from("submittedMoodForms").insert([
+        {
+          user_id: user.id,
+          mood: selectedMood,
+          activities: selectedActivities,
+          note,
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
+      if (error) throw error;
+
+      setHasSubmittedToday(true);
+      console.log("✅ Mood form submitted successfully!");
+    } catch (error) {
+      console.error("❌ Error submitting mood form:", error);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="text-center text-gray-400 py-10">
+        Checking your mood entry for today...
+      </div>
+    );
+  }
 
   if (hasSubmittedToday) {
     return (
@@ -61,8 +96,9 @@ export default function FeelingsForm() {
     );
   }
 
+  // Normal form UI
   return (
-    <div className="relative group">
+    <div className="relative group  max-w-2xl mx-auto ">
       {/* Glow effect */}
       <div className="absolute -inset-0.5 bg-linear-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity" />
 

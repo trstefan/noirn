@@ -1,40 +1,23 @@
 "use client";
 
 import { Calendar } from "lucide-react";
+import { moodColors, activityColors } from "@/constants";
 
 interface NoteCardProps {
-  date: string;
-  feeling: string;
-  activities: string[];
+  id: string;
+  mood: string;
+  activities: string[] | null;
   note: string;
+  created_at: string;
 }
 
-const moodColors: Record<string, string> = {
-  Happy: "from-yellow-400 to-orange-400",
-  Loved: "from-pink-400 to-red-400",
-  Energetic: "from-purple-400 to-blue-400",
-  Neutral: "from-gray-400 to-gray-500",
-  Sad: "from-blue-400 to-indigo-400",
-};
-
-const activityColors: Record<string, string> = {
-  Work: "from-blue-500 to-cyan-500",
-  Exercise: "from-green-500 to-emerald-500",
-  Social: "from-pink-500 to-rose-500",
-  Creative: "from-purple-500 to-violet-500",
-  Relax: "from-yellow-500 to-amber-500",
-  Learn: "from-orange-500 to-red-500",
-  Music: "from-indigo-500 to-blue-500",
-  Reading: "from-teal-500 to-cyan-500",
-};
-
 export default function NoteCard({
-  date,
-  feeling,
+  mood,
   activities,
   note,
+  created_at,
 }: NoteCardProps) {
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  const formattedDate = new Date(created_at).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -55,30 +38,33 @@ export default function NoteCard({
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {/* Feeling tag */}
+          {/* Mood tag */}
           <span
             className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium text-white bg-linear-to-r ${
-              moodColors[feeling] || moodColors.Neutral
+              moodColors[mood] || moodColors.Neutral
             }`}
           >
-            {feeling}
+            {mood}
           </span>
 
           {/* Activity tags */}
-          {activities.map((activity) => (
-            <span
-              key={activity}
-              className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium text-white bg-linear-to-r ${
-                activityColors[activity] || "from-gray-500 to-gray-600"
-              }`}
-            >
-              {activity}
-            </span>
-          ))}
+          {Array.isArray(activities) &&
+            activities.map((activity) => (
+              <span
+                key={activity}
+                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium text-white bg-linear-to-r ${
+                  activityColors[activity] || "from-gray-500 to-gray-600"
+                }`}
+              >
+                {activity}
+              </span>
+            ))}
         </div>
 
         {/* Note content */}
-        <p className="text-gray-300 leading-relaxed line-clamp-3">{note}</p>
+        {note && (
+          <p className="text-gray-300 leading-relaxed line-clamp-3">{note}</p>
+        )}
       </div>
     </div>
   );
