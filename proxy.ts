@@ -3,10 +3,10 @@ import { createServerClient } from "@supabase/ssr";
 import type { NextRequest } from "next/server";
 
 export async function proxy(req: NextRequest) {
-  // Clone request so we can modify headers
+  // Clone request to modify headers
   const res = NextResponse.next({ request: { headers: req.headers } });
 
-  // Create a Supabase client for the middleware
+  // Create Supabase client
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -18,7 +18,6 @@ export async function proxy(req: NextRequest) {
         },
         remove: (key, options) => {
           if (options) {
-            // NextResponse.cookies.delete expects either a single name string or an options object that includes the name
             res.cookies.delete({ name: key, ...options });
           } else {
             res.cookies.delete(key);
@@ -28,12 +27,13 @@ export async function proxy(req: NextRequest) {
     }
   );
 
-  // Check session
+  // ✅ Securely fetch authenticated user
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
-  const isAuthenticated = !!session?.user;
+  const isAuthenticated = !!user && !error;
   const isDashboardRoute = req.nextUrl.pathname.startsWith("/dashboard");
   const isAuthRoute = req.nextUrl.pathname.startsWith("/auth");
 

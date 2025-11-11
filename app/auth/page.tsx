@@ -1,14 +1,21 @@
+import Aurora from "@/components/Aurora";
 import AuthenticationCard from "@/components/AuthForm";
 
-export default function Home() {
+export default function AuthPage() {
   return (
-    <div className="min-h-screen bg-black text-white relative flex flex-col items-center justify-center p-4 overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-br from-purple-900/20 via-black to-blue-900/20" />
+    <div className="relative w-full h-screen bg-black text-white overflow-hidden">
+      {/* Full-screen Prism background */}
+      <div className="absolute inset-0 z-0">
+        <Aurora
+          colorStops={["#5800FF", "#BEECFF", "#E77EDC", "#FF4C3E"]}
+          blend={0.5}
+          amplitude={1.5}
+          speed={1.0}
+        />
+      </div>
 
-      {/* Subtle overlay for better contrast */}
-      <div className="absolute inset-0 bg-black/20" />
-
-      <div className="flex-1 flex items-center justify-center">
+      {/* Centered content */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full p-4">
         <AuthenticationCard />
       </div>
     </div>

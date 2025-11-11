@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import PulsingBorderShader from "@/components/ui/pulsing-border-shader";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function Component() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="max-h-screen bg-black text-white overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-purple-900/20 via-black to-blue-900/20" />
 
@@ -30,20 +31,21 @@ export default function Component() {
                 Your thoughts, unfiltered and unanalyzed. In a world obsessed
                 with data and algorithms, Noirn is your private space for pure,
                 honest reflection. There are no bots, no suggestions, and no
-                unsolicited analysis—just a clean, distraction-free environment
-                for you to explore your own mind. It’s the power of the journal,
-                modernized
+                unsolicited analysis. Just a clean, distraction-free environment
+                for you to explore your own mind.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-full group"
-              >
-                Uncover Your Patterns
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg rounded-full group"
+                >
+                  Uncover Your Patterns
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </div>
 

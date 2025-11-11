@@ -25,7 +25,7 @@ export default function Navbar() {
     try {
       setIsSigningOut(true);
       await supabase.auth.signOut();
-      router.replace("/auth");
+      router.replace("/");
     } catch (error) {
       console.error("Error signing out:", error);
     } finally {
@@ -67,24 +67,8 @@ export default function Navbar() {
               <div className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Button>
           </div>
-
-          {/* Mobile Menu Button (future) */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
         </div>
       </div>
-
-      {/* Mobile Menu (optional expansion later) */}
-      {/* Add dropdown here if you want mobile navigation */}
 
       {/* Animated border bottom */}
       {isScrolled && (

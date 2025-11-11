@@ -112,6 +112,38 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes gradient-slow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    background-size: 200% 200%;
+  }
+  50% {
+    background-position: 100% 50%;
+    background-size: 200% 200%;
+  }
+}
+
+@keyframes gradient-slow-reverse {
+  0%,
+  100% {
+    background-position: 100% 50%;
+    background-size: 200% 200%;
+  }
+  50% {
+    background-position: 0% 50%;
+    background-size: 200% 200%;
+  }
+}
+
+.animate-gradient-slow {
+  animation: gradient-slow 15s ease infinite;
+}
+
+.animate-gradient-slow-reverse {
+  animation: gradient-slow-reverse 20s ease infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
