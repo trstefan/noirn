@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Noirn",
-  description: "Noirn - Mood based journal app",
+  title: "Noirn • Write to Know Yourself",
+  description:
+    "Capture thoughts, see patterns, act with clarity. Noirn helps you write to know yourself through intelligent journaling with your personal insights.",
 };
 
 export default function RootLayout({

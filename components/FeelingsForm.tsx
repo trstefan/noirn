@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Smile, Meh, Frown, Heart, Zap, Sparkles } from "lucide-react";
+import { Send } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 import { moodOptions, activityTags } from "@/constants";
@@ -199,7 +199,7 @@ export default function FeelingsForm({ user }: FeelingsFormProps) {
           className="w-full bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-6 text-lg rounded-xl disabled:opacity-50 disabled:cursor-not-allowed group/btn"
         >
           <span className="flex items-center justify-center gap-2">
-            <Sparkles className="w-5 h-5" />
+            <Send className="w-5 h-5" />
             Submit Entry
           </span>
         </Button>
