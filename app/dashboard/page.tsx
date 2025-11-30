@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import DashboardClient from "@/components/DashboardClient";
 
-// ✅ Server Component — checks auth before rendering
 export default async function DashboardPage() {
   const cookieStore = await cookies();
 
@@ -14,14 +13,13 @@ export default async function DashboardPage() {
   );
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
-  // Redirect unauthenticated users
-  if (!session?.user) {
+  if (error || !user) {
     redirect("/auth");
   }
 
-  // Pass user info to the client component
-  return <DashboardClient user={session.user} />;
+  return <DashboardClient user={user} />;
 }

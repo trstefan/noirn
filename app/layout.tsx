@@ -13,9 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Noirn • Write to Know Yourself",
+  title: "ChronoCompass • Write to Know Yourself",
   description:
-    "Capture thoughts, see patterns, act with clarity. Noirn helps you write to know yourself through intelligent journaling with your personal insights.",
+    "Capture thoughts, see patterns, act with clarity. ChronoCompass helps you write to know yourself through intelligent journaling with your personal insights.",
+  keywords: [
+    "mood tracker",
+    "productivity app",
+    "online journal",
+    "study timer",
+    "task manager",
+    "pomodoro session",
+    "mental wellness",
+    "daily planner",
+    "personal growth app",
+  ],
 };
 
 export default function RootLayout({
