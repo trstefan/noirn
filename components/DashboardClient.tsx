@@ -11,7 +11,7 @@ import Sidebar from "@/components/Sidebar";
 import FocusContent from "@/components/FocusContent";
 
 type ActiveTab = "today" | "history";
-type ActivePage = "dashboard" | "focus" | "history" | "settings";
+type ActivePage = "dashboard" | "focus" | "history";
 
 interface DashboardClientProps {
   user: User;
@@ -108,7 +108,6 @@ export default function DashboardClient({ user }: DashboardClientProps) {
 
           {activePage === "focus" && <FocusContent user={user} />}
           {activePage === "history" && <HistoryGrid user={user} />}
-          {activePage === "settings" && <div>Settings Page (TODO)</div>}
         </main>
       </div>
     </div>

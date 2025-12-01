@@ -37,8 +37,11 @@ export interface AmbientSound {
 
 export interface Task {
   id: string;
+  user_id: string;
   text: string;
   completed: boolean;
+  created_at: string;
+  completed_at: string | null;
 }
 
 export interface Subtask {

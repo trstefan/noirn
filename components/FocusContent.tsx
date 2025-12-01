@@ -84,7 +84,7 @@ export default function FocusContent({ user }: FocusContentProps) {
                   : ""
               }`}
             >
-              <TodoList isFocusMode={focusMode} />
+              <TodoList user={user} isFocusMode={focusMode} />
             </div>
           </div>
 
